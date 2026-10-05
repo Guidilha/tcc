@@ -12,9 +12,9 @@ def parse_experiments_parameters():
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_name', default='hypernn', type=str, help='which model to use: prim, hypernn.')
     parser.add_argument('--results_directory', default='results', type=str, help='where to store results.')
-    parser.add_argument('--max_train_epochs', default=300, type=int, help='maximum number of epochs.')
+    parser.add_argument('--max_train_epochs', default=3000, type=int, help='maximum number of epochs.')
     parser.add_argument('--max_number_of_boxes', default=1000, type=int, help='maximum number of boxes.')
-    parser.add_argument('--patience', default=20, type=int, help='early stopping count.')
+    parser.add_argument('--patience', default=200, type=int, help='early stopping count.')
     parser.add_argument('--tau', default=3.0, type=float, help='initial smooth sigmoid factor.')
     parser.add_argument('--alpha', default=1.0, type=float, help='initial smoothmax factor.')
     parser.add_argument('--use_cuda', default='True', type=str, help='set device as cuda if available.')
@@ -45,10 +45,10 @@ def get_hypernn_and_hyperparameters(experiment_options):
     hparam_grid = {
         'init_strategy'           : [experiment_options.init_strategy],
         'som_sigma'               : [1.0],
-        'som_lr'                  : [0.5],
-        'gamma_escala'            : [1.0,8.0],
-        #'dbscan_eps'              : [0.1,0.5,1],
-        #'dbscan_min_samples'      : [1,5],
+        'som_lr'                  : [0.5,0.01],
+        'gamma_escala'            : [1.0,5.0,8.0],
+        'dbscan_eps'              : [0.1,0.5,1],
+        'dbscan_min_samples'      : [1,5],
         'nboxes'                  : [2,6,12,20], #experiment_options.max_number_of_boxes],
         'device'                  : [device],
         'training_epochs'         : [experiment_options.max_train_epochs],

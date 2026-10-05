@@ -14,8 +14,6 @@ class HyperNNWithInitClassifier(AbstractClassifier):
         self,
         nboxes=2,
         init_strategy="random",
-        #kmeans_k=5,
-        #som_grid=(3, 3),
         som_sigma=1.0,
         som_lr=0.5,
         gamma_escala=1.0,
@@ -34,8 +32,6 @@ class HyperNNWithInitClassifier(AbstractClassifier):
     ):
         self.nboxes = nboxes
         self.init_strategy = init_strategy
-        #self.kmeans_k = kmeans_k
-        #self.som_grid = som_grid
         self.som_sigma = som_sigma
         self.som_lr = som_lr
         self.gamma_escala = gamma_escala
@@ -133,7 +129,7 @@ class HyperNNWithInitClassifier(AbstractClassifier):
             x=x_grid,
             y=y_grid,
             input_len=dim,
-            sigma=self.som_sigma,
+            sigma=y_grid/2,
             learning_rate=self.som_lr,
         )
         som.random_weights_init(X_som)
