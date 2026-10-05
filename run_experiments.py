@@ -66,9 +66,7 @@ def get_hypernn_and_hyperparameters(experiment_options):
 def main(experiment_options):
     model_name = experiment_options.model_name
 
-    if model_name == 'prim':
-        model, hyperparameters = get_prim_and_hyperparameters(experiment_options)
-    elif model_name == 'hypernn':
+    if model_name == 'hypernn':
         model, hyperparameters = get_hypernn_and_hyperparameters(experiment_options)
     else:
         return NotImplementedError(f'{model_name} is not implemented.')

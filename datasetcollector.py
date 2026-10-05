@@ -41,9 +41,7 @@ class DatasetCollector:
             
         return datasets
     
-    def get_all_datasets(self):
-        '''Returns all available MLDatasets'''
-       
+    def get_all_datasets(self):       
         return self.get_datasets_by_names(list(self._available_datasets.keys()))
     
     def load_iris(self) -> MLDataset:
@@ -76,7 +74,6 @@ class DatasetCollector:
         return MLDataset(X,y,name=WINE)
                    
     def load_cars(self) -> MLDataset:
-        # TODO: add ordinal encoding
         X, y = fetch_openml('car-evaluation', version=1, return_X_y=True, as_frame=False)
         return MLDataset(X, y, name=CARS)
                     

@@ -80,7 +80,6 @@ class ModelEvaluator:
     
     def compute_metric_scores(self, y_true, y_pred, prefix=''):
         '''Computes evaluation metrics'''
-        
         scores = {
             f'{prefix}accuracy': mtr.accuracy_score(y_true, y_pred),
             f'{prefix}precision': mtr.precision_score(y_true, y_pred),
@@ -99,7 +98,7 @@ class ModelEvaluator:
         # Evaluate model using one-vs-all
         for i, label in enumerate(distinct_labels):
             self.logger.info(f'Seed: {seed}, Dataset: {dataset_name}, Label: {label}, {i}/{len(distinct_labels)}.')
-            
+             
             # Adjust current labels
             y_current = binarize_labels(y, label)
             
@@ -118,7 +117,7 @@ class ModelEvaluator:
                 num_cross_validation_folds=self.cross_validation_folds,
                 evaluation_metric=self.evaluation_metric, 
                 random_state=seed)
-            
+
             # Search for hyperparameters
             start_grid_search_time = time.time()
             best_model = gridsearch.fit(X_train, y_train)
@@ -126,6 +125,7 @@ class ModelEvaluator:
             
             grid_search_time = end_grid_search_time - start_grid_search_time
             tb_logger = HyperNNTensorBoardLogger(log_dir="runs")
+            
             # Train best model
             start_train_time = time.time()
             best_model.fit(X_train, y_train)
